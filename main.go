@@ -4,7 +4,10 @@ package main
 // live: https://statsapi.web.nhl.com/api/v1/game/2021020562/feed/live
 
 import (
+	"encoding/json"
 	"fmt"
+	"io/ioutil"
+	"net/http"
 	"strconv"
 
 	"github.com/PuerkitoBio/goquery"
@@ -13,9 +16,54 @@ import (
 	"github.com/gudsson/nhl-go/utils"
 )
 
+// type people struct {
+// 	Number int `json:"number"`
+// }
+
 func main() {
-	events := getEvents()
-	fmt.Println(events)
+	// events := getEvents()
+	// text := `{"people": [{"craft": "ISS", "name": "Sergey Rizhikov"}, {"craft": "ISS", "name": "Andrey Borisenko"}, {"craft": "ISS", "name": "Shane Kimbrough"}, {"craft": "ISS", "name": "Oleg Novitskiy"}, {"craft": "ISS", "name": "Thomas Pesquet"}, {"craft": "ISS", "name": "Peggy Whitson"}], "message": "success", "number": 6}`
+
+	// url := "http://api.open-notify.org/astros.json"
+
+	// textBytes := []byte(text)
+
+	// people1 := people{}
+	// err := json.Unmarshal(textBytes, &people1)
+	// if err != nil {
+	// 	fmt.Println(err)
+	// 	return
+	// }
+	// fmt.Println(people1.Number)
+	// events := getEvents()
+	// fmt.Println(events)
+	getCoordinates()
+}
+
+func getCoordinates() {
+	// c := colly.NewCollector(
+	// 	colly.AllowedDomains("statsapi.web.nhl.com"),
+	// )
+
+	// c.OnHTML("body", func(e *colly.HTMLElement) {
+	// 	fmt.Println(e.DOM.Text())
+	// })
+
+	// c.Visit("https://statsapi.web.nhl.com/api/v1/game/2021020562/feed/live") 
+	resp, err := http.Get("https://statsapi.web.nhl.com/api/v1/game/2021020562/feed/live")
+	if err != nil {
+			fmt.Println("No response from request")
+	}
+	defer resp.Body.Close()
+	body, err := ioutil.ReadAll(resp.Body) // response body is []byte
+
+	var result model.LiveFeedJSON
+	if err := json.Unmarshal(body, &result); err != nil {
+		fmt.Println("Can not unmarshal JSON")
+	}
+
+	// fmt.Println(string(body))              // convert to string before print
+	fmt.Println(result.Copyright)
 }
 
 func getEvents() []model.Event {

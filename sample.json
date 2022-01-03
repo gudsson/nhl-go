@@ -1,0 +1,65 @@
+{
+  "copyright": "NHL and the NHL Shield are registered trademarks of the National Hockey League. NHL and NHL team marks are the property of the NHL and its teams. © NHL 2022. All Rights Reserved.",
+  "gamePk": 2021020562,
+  "link": "/api/v1/game/2021020562/feed/live",
+  "metaData": {
+    "wait": 10,
+    "timeStamp": "20211231_212408"
+  },
+  "liveData": {
+    "plays": {
+      "allPlays": [
+        {
+          "players": [
+            {
+              "player": {
+                "id": 8475197,
+                "fullName": "Tyson Barrie",
+                "link": "/api/v1/people/8475197"
+              },
+              "playerType": "Shooter"
+            },
+            {
+              "player": {
+                "id": 8478406,
+                "fullName": "Mackenzie Blackwood",
+                "link": "/api/v1/people/8478406"
+              },
+              "playerType": "Unknown"
+            }
+          ],
+          "result": {
+            "event": "Missed Shot",
+            "eventCode": "NJD856",
+            "eventTypeId": "MISSED_SHOT",
+            "description": "Tyson Barrie Wide of Net Mackenzie Blackwood"
+          },
+          "about": {
+            "eventIdx": 339,
+            "eventId": 856,
+            "period": 4,
+            "periodType": "OVERTIME",
+            "ordinalNum": "OT",
+            "periodTime": "01:26",
+            "periodTimeRemaining": "03:34",
+            "dateTime": "2021-12-31T20:48:13Z",
+            "goals": {
+              "away": 5,
+              "home": 5
+            }
+          },
+          "coordinates": {
+            "x": 66,
+            "y": -13
+          },
+          "team": {
+            "id": 22,
+            "name": "Edmonton Oilers",
+            "link": "/api/v1/teams/22",
+            "triCode": "EDM"
+          }
+        }
+      ]
+    }
+  }
+}

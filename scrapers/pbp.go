@@ -1,6 +1,8 @@
 package scrapers
 
 import (
+	"fmt"
+	"os"
 	"strconv"
 
 	"github.com/PuerkitoBio/goquery"
@@ -9,7 +11,11 @@ import (
 	"github.com/gudsson/nhl-go/utils"
 )
 
-func GetEvents() []model.Event {
+func GetEvents(gameId string) []model.Event {
+	year, _ := strconv.Atoi(gameId[0:4])
+	pbpId := []string{strconv.Itoa(year) + strconv.Itoa(year + 1), os.Args[1][4:]}
+	fmt.Println(pbpId)
+
 	c := colly.NewCollector(
 		colly.AllowedDomains("www.nhl.com"),
 	)
@@ -46,7 +52,8 @@ func GetEvents() []model.Event {
 		eventArr = append(eventArr, event)
 	})
 
-	c.Visit("http://www.nhl.com/scores/htmlreports/20212022/PL020562.HTM") 
+	url := fmt.Sprintf("http://www.nhl.com/scores/htmlreports/%s/PL%s.HTM", pbpId[0], pbpId[1])
+	c.Visit(url)
 
 	return eventArr
 }

@@ -7,9 +7,10 @@ import (
 	"github.com/gudsson/nhl-go/utils"
 )
 
-func CombinePbpAndFeed() []model.Event {
-	feedEvents := GetFeed()
-	pbpEvents := GetEvents()
+func CombinePbpAndFeed(gameId string) []model.Event {
+	feedEvents := GetFeed(gameId)
+	pbpEvents := GetEvents(gameId)
+
 	inFeedPeriod := false
 	inPbpPeriod := false
 
